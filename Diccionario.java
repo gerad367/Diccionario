@@ -1,3 +1,7 @@
+/** 
+ * Clase que representa un diccionario de claves 'K' a valores 'V'
+ * 
+ * */ 
 public class Diccionario<K, V> {
     private int capacity;
     private int used;
