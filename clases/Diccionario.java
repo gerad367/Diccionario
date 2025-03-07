@@ -1,3 +1,5 @@
+package clases;
+
 /** 
  * Clase que representa un diccionario de claves 'K' a valores 'V'
  * 
@@ -27,7 +29,7 @@ public class Diccionario<K, V> {
     }
 
     public void set(K key, V value) {
-        if (capacity / used > 0.8) resize(capacity * 2);
+        if (capacity / ++used > 0.8) resize(capacity * 2);
 
         int initial_index = key.hashCode() % capacity;
         int i = initial_index;
