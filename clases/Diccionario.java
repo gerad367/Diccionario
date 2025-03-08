@@ -29,8 +29,6 @@ public class Diccionario<K, V> {
     }
 
     public void set(K key, V value) {
-        if (key == null) return;
-
         if ((used + 1) / capacity > 0.8) resize(capacity * 2);
 
         int i = key.hashCode() % capacity;
@@ -73,42 +71,25 @@ public class Diccionario<K, V> {
     public void clear(){}
 
     // Gerad
-    @SuppressWarnings("unchecked")
-	public Diccionario<K, V> copy(){
-        Diccionario<K, V> dict;
-        Object[][] items = this.items();
-        for (int i = 0; i < items.length; i++) {
-            dict.set((K) items[i][0], (V) items[i][1]);
-        }
-        return dict;
-    }
+    public void copy(){}
 
     // Alejandro
     public void fromKeys(){}
 
     // Ricardo
     public Object[][] items() {
-        int j = 0;
         Object[][] items = new Object[this.used][2];
-        for(int i = 0; i < this.capacity; i++) {
+        for(int i = 0; i < this.used; i++) {
             if (this.keys[i] != null) {
-                items[j][0] = this.keys[i];
-                items[j][1] = this.values[i];
-                j++;
+                items[i][0] = this.keys[i];
+                items[i][1] = this.values[i];
             }
         }
         return items;
     }
 
     // Gerad
-    public Object[] keys(){
-        Object[] keys = new Object[this.used];
-        for (int i, j = 0; i < this.used; i++) {
-            if (this.keys[i] != null)
-                keys[j++] = this.keys[i];
-        }
-        return keys;
-    }
+    public void keys(){}
 
     // Alberto
     public void pop(){}
@@ -124,14 +105,16 @@ public class Diccionario<K, V> {
 
     // Ricardo
     public  Object[] values() {
-        int j = 0;
         Object[] values = new Object[this.used];
-        for(int i = 0; i < this.capacity; i++) {
-            if (this.keys[i] != null) {
-                values[j] = this.values[i];
-                j++;
+        for(int i = 0; i < this.used; i++) {
+            if (this.values[i] != null) {
+                values[i] = this.values[i];
             }
         }
         return values;
     }
+>>>>>>> 5530b22b9b2560e0f2f700861391f52a809578b0
+
+
+}
 }
