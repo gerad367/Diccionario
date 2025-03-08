@@ -56,11 +56,44 @@ public class Diccionario<K, V> {
         Object[] new_keys = new Object[new_capacity];
         Object[] new_values = new Object[new_capacity];
         for (int i = 0; i < capacity; i++) {
-            new_keys[i] = keys[i];
-            new_values[i] = values[i];
+            if (keys[i] == null) continue;
+            int j = keys[i].hashCode() % new_capacity;
+            while (new_keys[j] != null) j = (j + 1) % new_capacity;
+            new_keys[j] = keys[i];
+            new_values[j] = values[i];
         }
         keys = new_keys;
         values = new_values;
         capacity = new_capacity;
     }
+
+    // Alejandro
+    public void clear(){}
+
+    // Gerad
+    public void copy(){}
+
+    // Alejandro
+    public void fromKeys(){}
+
+    // Ricardo
+    public void items(){}
+
+    // Gerad
+    public void keys(){}
+
+    // Alberto
+    public void pop(){}
+
+    // Alejandro
+    public void popItem(){}
+
+    // Bea
+    public void setDefault(){}
+
+    // Alberto
+    public void update(){}
+
+    // Ricardo
+    public void values(){}
 }
