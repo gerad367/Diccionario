@@ -69,9 +69,6 @@ public class Diccionario<K, V> {
         capacity = new_capacity;
     }
 
-    // Alejandro
-    public void clear(){}
-
     // Gerad
     @SuppressWarnings("unchecked")
 	public Diccionario<K, V> copy(){
@@ -82,9 +79,6 @@ public class Diccionario<K, V> {
         }
         return dict;
     }
-
-    // Alejandro
-    public void fromKeys(){}
 
     // Ricardo
     public Object[][] items() {
@@ -113,9 +107,6 @@ public class Diccionario<K, V> {
     // Alberto
     public void pop(){}
 
-    // Alejandro
-    public void popItem(){}
-
     // Bea
     public void setDefault(){}
 
@@ -133,5 +124,67 @@ public class Diccionario<K, V> {
             }
         }
         return values;
+    }
+
+    public static class Pair<K, V> {
+        private final K key;
+        private final V value;
+
+        public Pair(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return "(" + key + ", " + value + ")";
+        }
+    }
+    //popitem
+    @SuppressWarnings("unchecked")
+	public Pair<K, V> popitem() {
+        if (used == 0) {
+            throw new IllegalStateException("Dictionary is empty");
+        }
+
+        for (int i = capacity - 1; i >= 0; i--) {
+            if (keys[i] != null) {
+                K key = (K) keys[i];
+                V value = (V) values[i];
+                keys[i] = null;
+                values[i] = null;
+                used--;
+                return new Pair<>(key, value);
+            }
+        }
+        throw new IllegalStateException("Error, dictionary is not empty, but cannot pop item");
+    }
+
+    public static <K, V> Diccionario<K, V> fromkeys(K[] keys, V value) {
+        if (keys.length == 0) {
+            throw new IllegalArgumentException("The keys array is empty.");
+        }
+        Diccionario<K, V> nuevoDiccionario = new Diccionario<>(keys.length);
+        for (K k : keys) {
+            nuevoDiccionario.set(k, value);
+        }
+        return nuevoDiccionario;
+    }
+
+    public static <K> Diccionario<K, Object> fromkeys(K[] keys) {
+        if (keys.length == 0) {
+            throw new IllegalArgumentException("Error, the keys array is empty.");
+        }
+        return fromkeys(keys, null);
+    }
+
+    //clear
+    public void clear() {
+        if(this.used == 0) {
+            throw new IllegalStateException("Error, dictionary is empty.");
+        }
+        this.used = 0;
+        this.keys = new Object[this.capacity];
+        this.values = new Object[this.capacity];
     }
 }
