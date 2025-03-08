@@ -77,7 +77,16 @@ public class Diccionario<K, V> {
     public void fromKeys(){}
 
     // Ricardo
-    public void items(){}
+    public Object[][] items() {
+        Object[][] items = new Object[this.used][2];
+        for(int i = 0; i < this.used; i++) {
+            if (this.keys[i] != null) {
+                items[i][0] = this.keys[i];
+                items[i][1] = this.values[i];
+            }
+        }
+        return items;
+    }
 
     // Gerad
     public void keys(){}
@@ -95,5 +104,13 @@ public class Diccionario<K, V> {
     public void update(){}
 
     // Ricardo
-    public void values(){}
+    public  Object[] values() {
+        Object[] values = new Object[this.used];
+        for(int i = 0; i < this.used; i++) {
+            if (this.values[i] != null) {
+                values[i] = this.values[i];
+            }
+        }
+        return values;
+    }
 }
