@@ -88,11 +88,13 @@ public class Diccionario<K, V> {
 
     // Ricardo
     public Object[][] items() {
+        int j = 0;
         Object[][] items = new Object[this.used][2];
-        for(int i = 0; i < this.used; i++) {
+        for(int i = 0; i < this.capacity; i++) {
             if (this.keys[i] != null) {
-                items[i][0] = this.keys[i];
-                items[i][1] = this.values[i];
+                items[j][0] = this.keys[i];
+                items[j][1] = this.values[i];
+                j++;
             }
         }
         return items;
@@ -122,10 +124,12 @@ public class Diccionario<K, V> {
 
     // Ricardo
     public  Object[] values() {
+        int j = 0;
         Object[] values = new Object[this.used];
-        for(int i = 0; i < this.used; i++) {
-            if (this.values[i] != null) {
-                values[i] = this.values[i];
+        for(int i = 0; i < this.capacity; i++) {
+            if (this.keys[i] != null) {
+                values[j] = this.values[i];
+                j++;
             }
         }
         return values;
