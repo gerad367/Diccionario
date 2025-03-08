@@ -29,12 +29,18 @@ public class Diccionario<K, V> {
     }
 
     public void set(K key, V value) {
-        if (capacity / ++used > 0.8) resize(capacity * 2);
+        if ((used + 1) / capacity > 0.8) resize(capacity * 2);
 
-        int initial_index = key.hashCode() % capacity;
-        int i = initial_index;
-        while (keys[i] == null) i = (i + 1) % capacity;
-
+        int i = key.hashCode() % capacity;
+        while (keys[i] != null) {
+            if (keys[i] == key) {
+                values[i] = value;
+                return;
+            }
+            i = (i + 1) % capacity;
+        }
+        keys[i] = key;
+        values[i] = value;
         used++;
     }
 
