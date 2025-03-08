@@ -71,7 +71,15 @@ public class Diccionario<K, V> {
     public void clear(){}
 
     // Gerad
-    public void copy(){}
+    @SuppressWarnings("unchecked")
+	public Diccionario<K, V> copy(){
+        Diccionario<K, V> dict;
+        Object[][] items = this.items();
+        for (int i = 0; i < items.length; i++) {
+            dict.set((K) items[i][0], (V) items[i][1]);
+        }
+        return dict;
+    }
 
     // Alejandro
     public void fromKeys(){}
@@ -89,7 +97,14 @@ public class Diccionario<K, V> {
     }
 
     // Gerad
-    public void keys(){}
+    public Object[] keys(){
+        Object[] keys = new Object[this.used];
+        for (int i, j = 0; i < this.used; i++) {
+            if (this.keys[i] != null)
+                keys[j++] = this.keys[i];
+        }
+        return keys;
+    }
 
     // Alberto
     public void pop(){}
