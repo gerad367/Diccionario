@@ -29,6 +29,8 @@ public class Diccionario<K, V> {
     }
 
     public void set(K key, V value) {
+        if (key == null) return;
+
         if ((used + 1) / capacity > 0.8) resize(capacity * 2);
 
         int i = key.hashCode() % capacity;
