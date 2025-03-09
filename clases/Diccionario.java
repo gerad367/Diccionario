@@ -105,13 +105,42 @@ public class Diccionario<K, V> {
     }
 
     // Alberto
-    public void pop(){}
+    public V pop(K key) {
+        for (int i = 0; i < capacity; i++) {
+            if (keys[i] != null && keys[i].equals(key)) {
+                V value = (V) values[i];
+                keys[i] = null;
+                values[i] = null;
+                used--;
+                return value;
+            }
+        }
+        return null;
+    }
 
     // Bea
     public void setDefault(){}
 
     // Alberto
-    public void update(){}
+    public void update(K key, V value) {
+        for (int i = 0; i < capacity; i++) {
+            if (keys[i] != null && keys[i].equals(key)) {
+                values[i] = value;
+                return;
+            }
+        }
+        
+        for (int i = 0; i < capacity; i++) {
+            if (keys[i] == null) { 
+                keys[i] = key;
+                values[i] = value;
+                used++;
+                return;
+            }
+        }
+        resize(capacity * 2);
+        update(key, value);
+    }
 
     // Ricardo
     public  Object[] values() {
