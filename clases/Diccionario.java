@@ -119,7 +119,14 @@ public class Diccionario<K, V> {
     }
 
     // Bea
-    public void setDefault(){}
+    public V setDefault(K key, V default){
+
+    	for(int i=0; i<this.capacity;i++){
+        	if(key.equals((K) keys[i])) return (V) values[i];
+    	}
+    	this.set(clave, default);
+    	return default;
+    }
 
     // Alberto
     public void update(K key, V value) {
